@@ -17,6 +17,38 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#281411] text-[#FFF9F1] border-t border-[#351C18] relative overflow-hidden">
+      {/* Crave Bakery Inspired Bottom CTA Banner */}
+      <div className="bg-[#F47735] text-[#FFFFFF] py-12 px-4 sm:px-6 lg:px-8 border-b border-[#E06322] relative overflow-hidden">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left relative z-10">
+          <div>
+            <span className="text-[11px] font-black uppercase tracking-widest text-[#FFD83D] block mb-1">
+              Fresh Daily From Vandiperiyar, Idukki
+            </span>
+            <h3 className="editorial-headline text-3xl sm:text-4xl lg:text-5xl font-black text-[#FFFFFF] tracking-tight">
+              Ready For Delicious Bakes & Snacks?
+            </h3>
+            <p className="text-xs sm:text-sm text-[#FFF9F1]/90 max-w-xl mt-1">
+              Crisp banana chips fried in 100% pure coconut oil, authentic Kerala bakery treats, and bulk wholesale supply.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
+            <Link
+              href="/products"
+              className="px-7 py-3.5 rounded-full bg-[#FFFFFF] hover:bg-[#FFF9F1] text-[#281411] font-display font-black text-xs uppercase tracking-wider transition-all shadow-md hover:scale-105"
+            >
+              Order Online
+            </Link>
+            <Link
+              href="/wholesale"
+              className="px-7 py-3.5 rounded-full bg-[#281411] hover:bg-[#351C18] text-[#FFD83D] font-display font-black text-xs uppercase tracking-wider border border-[#FFD83D]/40 transition-all hover:scale-105"
+            >
+              Wholesale Portal
+            </Link>
+          </div>
+        </div>
+      </div>
+
       {/* Top Newsletter Strip */}
       <div className="border-b border-[#351C18] py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
