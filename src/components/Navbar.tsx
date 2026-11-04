@@ -23,12 +23,7 @@ import MegaMenu from './ui/MegaMenu';
 import CartDrawer from './ui/CartDrawer';
 import SearchOverlay from './ui/SearchOverlay';
 
-interface NavbarProps {
-  onOpenDiagnostics?: () => void;
-  apiConnected?: boolean | null;
-}
-
-export default function Navbar({ onOpenDiagnostics, apiConnected }: NavbarProps) {
+export default function Navbar() {
   const pathname = usePathname();
   const { user, profile, logout } = useAuth();
   const { itemsCount } = useCart();
@@ -158,25 +153,8 @@ export default function Navbar({ onOpenDiagnostics, apiConnected }: NavbarProps)
               </Link>
             </nav>
 
-            {/* Right Action Icons: Search, Diagnostics, Account, Cart */}
+            {/* Right Action Icons: Search, Account, Cart */}
             <div className="flex items-center gap-2 sm:gap-3">
-              {/* API Diagnostic Button */}
-              {onOpenDiagnostics && (
-                <button
-                  onClick={onOpenDiagnostics}
-                  aria-label="API System Diagnostic"
-                  className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F7EFE6] hover:bg-[#EADBCC] text-[#281411] text-[11px] font-bold transition-colors border border-[#EADBCC]"
-                  title="Check PostgreSQL and Django Backend Connectivity"
-                >
-                  <span
-                    className={`w-2 h-2 rounded-full ${
-                      apiConnected ? 'bg-[#287B52] animate-pulse' : 'bg-amber-500'
-                    }`}
-                  />
-                  <span className="hidden xl:inline">API</span>
-                </button>
-              )}
-
               {/* Search Button */}
               <button
                 onClick={() => setSearchOpen(true)}
