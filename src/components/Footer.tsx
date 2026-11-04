@@ -1,12 +1,34 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Sparkles, Building2, ShieldCheck, Heart, Mail, CheckCircle2 } from 'lucide-react';
+import { useGSAP } from '@gsap/react';
+import { registerGSAP, isReducedMotion } from '@/lib/animation/gsapUtils';
 
 export default function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+
+  useGSAP(
+    () => {
+      if (isReducedMotion()) return;
+      const { gsap } = registerGSAP();
+
+      gsap.from(footerRef.current, {
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: 'top 92%',
+        },
+        y: 40,
+        opacity: 0.2,
+        duration: 0.9,
+        ease: 'power3.out',
+      });
+    },
+    { scope: footerRef }
+  );
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,18 +38,18 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#281411] text-[#FFF9F1] border-t border-[#351C18] relative overflow-hidden">
+    <footer ref={footerRef} className="bg-[#542817] text-[#FFF9EF] border-t border-[#3D1C10] relative overflow-hidden">
       {/* Crave Bakery Inspired Bottom CTA Banner */}
-      <div className="bg-[#F47735] text-[#FFFFFF] py-12 px-4 sm:px-6 lg:px-8 border-b border-[#E06322] relative overflow-hidden">
+      <div className="bg-[#287B35] text-[#FFFFFF] py-12 px-4 sm:px-6 lg:px-8 border-b border-[#20632a] relative overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left relative z-10">
           <div>
-            <span className="text-[11px] font-black uppercase tracking-widest text-[#FFD83D] block mb-1">
+            <span className="text-[11px] font-black uppercase tracking-widest text-[#FFB928] block mb-1">
               Fresh Daily From Vandiperiyar, Idukki
             </span>
             <h3 className="editorial-headline text-3xl sm:text-4xl lg:text-5xl font-black text-[#FFFFFF] tracking-tight">
               Ready For Delicious Bakes & Snacks?
             </h3>
-            <p className="text-xs sm:text-sm text-[#FFF9F1]/90 max-w-xl mt-1">
+            <p className="text-xs sm:text-sm text-[#FFF9EF]/90 max-w-xl mt-1">
               Crisp banana chips fried in 100% pure coconut oil, authentic Kerala bakery treats, and bulk wholesale supply.
             </p>
           </div>
@@ -35,13 +57,13 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
             <Link
               href="/products"
-              className="px-7 py-3.5 rounded-full bg-[#FFFFFF] hover:bg-[#FFF9F1] text-[#281411] font-display font-black text-xs uppercase tracking-wider transition-all shadow-md hover:scale-105"
+              className="px-7 py-3.5 rounded-full bg-[#FFFFFF] hover:bg-[#FFF9EF] text-[#542817] font-display font-black text-xs uppercase tracking-wider transition-all shadow-md hover:scale-105"
             >
               Order Online
             </Link>
             <Link
               href="/wholesale"
-              className="px-7 py-3.5 rounded-full bg-[#281411] hover:bg-[#351C18] text-[#FFD83D] font-display font-black text-xs uppercase tracking-wider border border-[#FFD83D]/40 transition-all hover:scale-105"
+              className="px-7 py-3.5 rounded-full bg-[#542817] hover:bg-[#3D1C10] text-[#FFB928] font-display font-black text-xs uppercase tracking-wider border border-[#FFB928]/40 transition-all hover:scale-105"
             >
               Wholesale Portal
             </Link>
@@ -50,15 +72,15 @@ export default function Footer() {
       </div>
 
       {/* Top Newsletter Strip */}
-      <div className="border-b border-[#351C18] py-12 lg:py-16">
+      <div className="border-b border-[#3D1C10] py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="text-center lg:text-left max-w-xl">
-              <span className="text-[10px] font-black uppercase tracking-widest text-[#FFD83D] flex items-center justify-center lg:justify-start gap-1.5 mb-2">
-                <Sparkles className="w-3.5 h-3.5 text-[#F47735]" />
+              <span className="text-[10px] font-black uppercase tracking-widest text-[#FFB928] flex items-center justify-center lg:justify-start gap-1.5 mb-2">
+                <Sparkles className="w-3.5 h-3.5 text-[#287B35]" />
                 Fresh From The Ovens of Vandiperiyar
               </span>
-              <h3 className="editorial-headline text-3xl sm:text-4xl font-black text-[#FFF9F1] tracking-tight">
+              <h3 className="editorial-headline text-3xl sm:text-4xl font-black text-[#FFF9EF] tracking-tight">
                 JOIN THE ONFRESH COMMUNITY
               </h3>
               <p className="text-xs sm:text-sm text-[#E8DCCF]/80 mt-1">
@@ -69,7 +91,7 @@ export default function Footer() {
             {/* Newsletter Input Box */}
             <div className="w-full lg:w-auto">
               {subscribed ? (
-                <div className="flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#287B52] text-white text-xs font-bold shadow-md">
+                <div className="flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#287B35] text-white text-xs font-bold shadow-md">
                   <CheckCircle2 className="w-4 h-4" />
                   <span>Welcome! You are on our VIP tasting list.</span>
                 </div>
@@ -81,11 +103,11 @@ export default function Footer() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address..."
-                    className="px-5 py-3.5 rounded-full bg-[#351C18] border border-[#EADBCC]/20 text-[#FFF9F1] placeholder:text-[#A89088] text-xs font-medium outline-none focus:border-[#FFD83D] w-full transition-colors"
+                    className="px-5 py-3.5 rounded-full bg-[#3D1C10] border border-[#EADBCC]/20 text-[#FFF9EF] placeholder:text-[#A89088] text-xs font-medium outline-none focus:border-[#FFB928] w-full transition-colors"
                   />
                   <button
                     type="submit"
-                    className="px-6 py-3.5 rounded-full bg-[#FFD83D] hover:bg-[#F2C71E] text-[#281411] font-display font-black text-xs uppercase tracking-wider shrink-0 transition-all shadow-md flex items-center justify-center gap-1.5"
+                    className="px-6 py-3.5 rounded-full bg-[#FFB928] hover:bg-[#e0a020] text-[#542817] font-display font-black text-xs uppercase tracking-wider shrink-0 transition-all shadow-md flex items-center justify-center gap-1.5"
                   >
                     <span>Subscribe</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -101,10 +123,12 @@ export default function Footer() {
       <div className="py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
-            
             {/* Column 1 & 2: Brand Identity & Location (2 Cols) */}
             <div className="lg:col-span-2 space-y-4">
-              <Link href="/" className="inline-block p-2.5 bg-[#FFF9F1] rounded-2xl shadow-md group hover:scale-105 transition-transform duration-300">
+              <Link
+                href="/"
+                className="inline-block p-2.5 bg-[#FFF9EF] rounded-2xl shadow-md group hover:scale-105 transition-transform duration-300"
+              >
                 <img
                   src="/images/logo.png"
                   alt="OnFresh — Bakery & Traditional Kerala Snacks"
@@ -117,19 +141,23 @@ export default function Footer() {
               </p>
 
               <div className="pt-2 text-xs text-[#E8DCCF]/90 space-y-1">
-                <p><span className="text-[#FFD83D] font-bold">Facility:</span> Main Road, NH 183 Corridor, Vandiperiyar, Idukki, Kerala 685533</p>
-                <p><span className="text-[#FFD83D] font-bold">Support:</span> support@onfresh.in • +91 94470 00000</p>
+                <p>
+                  <span className="text-[#FFB928] font-bold">Facility:</span> NH 183 Corridor, Vandiperiyar, Idukki, Kerala 685533
+                </p>
+                <p>
+                  <span className="text-[#FFB928] font-bold">Support:</span> support@onfresh.in • +91 94470 00000
+                </p>
               </div>
 
               {/* Trust Badges */}
               <div className="pt-2 flex flex-wrap items-center gap-2">
-                <span className="px-3 py-1 rounded-full bg-[#351C18] border border-[#EADBCC]/20 text-[10px] font-bold text-[#FFD83D] uppercase tracking-wider">
+                <span className="px-3 py-1 rounded-full bg-[#3D1C10] border border-[#EADBCC]/20 text-[10px] font-bold text-[#FFB928] uppercase tracking-wider">
                   FSSAI Certified
                 </span>
-                <span className="px-3 py-1 rounded-full bg-[#351C18] border border-[#EADBCC]/20 text-[10px] font-bold text-[#FFF9F1] uppercase tracking-wider">
+                <span className="px-3 py-1 rounded-full bg-[#3D1C10] border border-[#EADBCC]/20 text-[10px] font-bold text-[#FFF9EF] uppercase tracking-wider">
                   GST Invoiced
                 </span>
-                <span className="px-3 py-1 rounded-full bg-[#351C18] border border-[#EADBCC]/20 text-[10px] font-bold text-[#287B52] uppercase tracking-wider">
+                <span className="px-3 py-1 rounded-full bg-[#3D1C10] border border-[#EADBCC]/20 text-[10px] font-bold text-[#287B35] uppercase tracking-wider">
                   100% Coconut Oil
                 </span>
               </div>
@@ -137,37 +165,37 @@ export default function Footer() {
 
             {/* Column 3: Traditional Snacks */}
             <div>
-              <h4 className="font-display font-black text-sm uppercase tracking-wider text-[#FFD83D] mb-4">
+              <h4 className="font-display font-black text-sm uppercase tracking-wider text-[#FFB928] mb-4">
                 Snack Varieties
               </h4>
               <ul className="space-y-2.5 text-xs text-[#E8DCCF]/80">
                 <li>
-                  <Link href="/categories/banana-chips" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/categories/banana-chips" className="hover:text-[#FFB928] transition-colors">
                     Kerala Banana Chips
                   </Link>
                 </li>
                 <li>
-                  <Link href="/categories/tapioca-jackfruit-chips" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/categories/tapioca-jackfruit-chips" className="hover:text-[#FFB928] transition-colors">
                     Tapioca & Jackfruit Chips
                   </Link>
                 </li>
                 <li>
-                  <Link href="/categories/murukku-traditional-snacks" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/categories/murukku-traditional-snacks" className="hover:text-[#FFB928] transition-colors">
                     Butter & Kai Murukku
                   </Link>
                 </li>
                 <li>
-                  <Link href="/categories/mixture-savouries" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/categories/mixture-savouries" className="hover:text-[#FFB928] transition-colors">
                     Special Kerala Mixture
                   </Link>
                 </li>
                 <li>
-                  <Link href="/categories/banana-chips" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/categories/banana-chips" className="hover:text-[#FFB928] transition-colors">
                     Sweet Sharkkara Varatti
                   </Link>
                 </li>
                 <li>
-                  <Link href="/categories/bakery-products" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/categories/bakery-products" className="hover:text-[#FFB928] transition-colors">
                     Cardamom Tea Rusks
                   </Link>
                 </li>
@@ -176,33 +204,36 @@ export default function Footer() {
 
             {/* Column 4: Wholesale B2B */}
             <div>
-              <h4 className="font-display font-black text-sm uppercase tracking-wider text-[#FFD83D] mb-4">
+              <h4 className="font-display font-black text-sm uppercase tracking-wider text-[#FFB928] mb-4">
                 Wholesale B2B
               </h4>
               <ul className="space-y-2.5 text-xs text-[#E8DCCF]/80">
                 <li>
-                  <Link href="/wholesale" className="hover:text-[#FFD83D] transition-colors flex items-center gap-1 font-bold text-[#FFD83D]">
+                  <Link
+                    href="/wholesale"
+                    className="hover:text-[#FFB928] transition-colors flex items-center gap-1 font-bold text-[#FFB928]"
+                  >
                     <Building2 className="w-3.5 h-3.5" />
                     <span>Wholesale Portal</span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/register?type=business" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/register?type=business" className="hover:text-[#FFB928] transition-colors">
                     Apply for Business Account
                   </Link>
                 </li>
                 <li>
-                  <Link href="/wholesale#pricing" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/wholesale#pricing" className="hover:text-[#FFB928] transition-colors">
                     Tiered Volume Margins
                   </Link>
                 </li>
                 <li>
-                  <Link href="/wholesale#logistics" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/wholesale#logistics" className="hover:text-[#FFB928] transition-colors">
                     Regional Master Cartons
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#enquiry" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/#enquiry" className="hover:text-[#FFB928] transition-colors">
                     Request Price Catalogue
                   </Link>
                 </li>
@@ -211,32 +242,32 @@ export default function Footer() {
 
             {/* Column 5: Customer & Support */}
             <div>
-              <h4 className="font-display font-black text-sm uppercase tracking-wider text-[#FFD83D] mb-4">
+              <h4 className="font-display font-black text-sm uppercase tracking-wider text-[#FFB928] mb-4">
                 Customer Care
               </h4>
               <ul className="space-y-2.5 text-xs text-[#E8DCCF]/80">
                 <li>
-                  <Link href="/account/orders" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/account/orders" className="hover:text-[#FFB928] transition-colors">
                     Track Orders & Invoices
                   </Link>
                 </li>
                 <li>
-                  <Link href="/account/profile" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/account/profile" className="hover:text-[#FFB928] transition-colors">
                     My Profile & Addresses
                   </Link>
                 </li>
                 <li>
-                  <Link href="/cart" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/cart" className="hover:text-[#FFB928] transition-colors">
                     Shopping Cart
                   </Link>
                 </li>
                 <li>
-                  <Link href="/login" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/login" className="hover:text-[#FFB928] transition-colors">
                     Sign In / Register
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#about" className="hover:text-[#FFD83D] transition-colors">
+                  <Link href="/#about" className="hover:text-[#FFB928] transition-colors">
                     Our Vandiperiyar Story
                   </Link>
                 </li>
@@ -247,13 +278,12 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-
           </div>
         </div>
       </div>
 
       {/* Copyright Bar */}
-      <div className="border-t border-[#351C18] py-6 text-xs text-[#A89088]">
+      <div className="border-t border-[#3D1C10] py-6 text-xs text-[#A89088]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p>
             &copy; {new Date().getFullYear()} OnFresh Foods Private Limited. All rights reserved. Vandiperiyar, Idukki District, Kerala.

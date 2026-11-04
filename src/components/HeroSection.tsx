@@ -1,21 +1,119 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Building2, Star, ShoppingBag } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { ArrowRight, Sparkles, Building2, Star, ShoppingBag, Award } from 'lucide-react';
+import { registerGSAP } from '@/lib/animation/gsapUtils';
+import { animationConfig, prefersReducedMotion } from '@/config/animationConfig';
+
+// Dynamic import of 3D Scene with SSR disabled for optimal performance
+const Hero3DScene = dynamic(() => import('./three/Hero3DScene'), {
+  ssr: false,
+  loading: () => null,
+});
 
 interface HeroSectionProps {
   onWholesaleClick?: () => void;
 }
 
 export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!animationConfig.enabled || prefersReducedMotion()) return;
+
+    const gsap = registerGSAP();
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: animationConfig.easings.heroEntrance } });
+
+      // 1. Label Reveal
+      tl.from('.hero-label', {
+        y: -18,
+        opacity: 0,
+        duration: 0.6,
+      })
+      // 2. Headline Words Staggered Reveal
+      .from(
+        '.hero-title-word',
+        {
+          y: 45,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 0.8,
+        },
+        '-=0.3'
+      )
+      // 3. Supporting Text
+      .from(
+        '.hero-subtext',
+        {
+          y: 20,
+          opacity: 0,
+          duration: 0.6,
+        },
+        '-=0.4'
+      )
+      // 4. CTA Buttons Elastic Pop
+      .from(
+        '.hero-cta-btn',
+        {
+          y: 20,
+          opacity: 0,
+          scale: 0.95,
+          stagger: 0.12,
+          duration: 0.6,
+          ease: 'back.out(1.6)',
+        },
+        '-=0.3'
+      )
+      // 5. Hero Image Card Reveal with Clipping Mask
+      .from(
+        '.hero-image-card',
+        {
+          scale: 0.92,
+          opacity: 0,
+          duration: 1.0,
+          ease: 'power3.out',
+        },
+        '-=0.5'
+      )
+      // 6. Side Feature Cards Stagger
+      .from(
+        '.hero-side-card',
+        {
+          y: 35,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 0.7,
+        },
+        '-=0.6'
+      );
+
+      // Continuous Gentle Floating on Decorative Elements
+      gsap.to('.hero-float-item', {
+        y: -12,
+        duration: 2.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        stagger: 0.4,
+      });
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="relative bg-[#2B1510] text-[#FFF9F1] overflow-hidden">
-      {/* Hand-drawn Bakery & Kerala Doodles (SVG Background Elements inspired by Crave Bakery) */}
-      <div className="absolute inset-0 pointer-events-none opacity-20 select-none overflow-hidden">
-        {/* Bread Doodle (Top Left) */}
+    <div ref={heroRef} className="relative bg-[#2B1510] text-[#FFF9F1] overflow-hidden">
+      
+      {/* 3D Three.js WebGL Scene (Lightweight procedural floating banana chip & gold particles) */}
+      <Hero3DScene />
+
+      {/* Hand-drawn Bakery & Kerala SVG Doodles */}
+      <div className="absolute inset-0 pointer-events-none opacity-20 select-none overflow-hidden z-0">
         <svg
-          className="absolute top-12 left-8 w-20 h-20 text-[#FFD83D]"
+          className="hero-float-item absolute top-12 left-8 w-20 h-20 text-[#FFB928]"
           viewBox="0 0 100 100"
           fill="none"
           stroke="currentColor"
@@ -28,9 +126,8 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
           <path d="M65,42 L58,55" />
         </svg>
 
-        {/* Croissant Doodle (Top Right) */}
         <svg
-          className="absolute top-16 right-12 w-20 h-20 text-[#F47735]"
+          className="hero-float-item absolute top-16 right-12 w-20 h-20 text-[#F47735]"
           viewBox="0 0 100 100"
           fill="none"
           stroke="currentColor"
@@ -42,9 +139,8 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
           <path d="M45,35 C48,28 52,28 55,35" />
         </svg>
 
-        {/* Wheat / Sparkle Doodle (Bottom Left) */}
         <svg
-          className="absolute bottom-16 left-16 w-16 h-16 text-[#FFD83D]"
+          className="hero-float-item absolute bottom-16 left-16 w-16 h-16 text-[#FFB928]"
           viewBox="0 0 100 100"
           fill="none"
           stroke="currentColor"
@@ -58,110 +154,111 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
           <ellipse cx="60" cy="60" rx="8" ry="4" transform="rotate(30 60 60)" />
         </svg>
 
-        {/* Star & Sparkle Accents */}
-        <span className="absolute top-28 left-1/3 text-xl text-[#FFD83D]">✦</span>
-        <span className="absolute top-1/4 right-1/4 text-sm text-[#FFD83D]">✧</span>
-        <span className="absolute bottom-24 right-1/6 text-2xl text-[#F47735]">✦</span>
+        <span className="hero-float-item absolute top-28 left-1/3 text-xl text-[#FFB928]">✦</span>
+        <span className="hero-float-item absolute top-1/4 right-1/4 text-sm text-[#FFB928]">✧</span>
+        <span className="hero-float-item absolute bottom-24 right-1/6 text-2xl text-[#F47735]">✦</span>
       </div>
 
       {/* Main Hero Container */}
       <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 lg:pt-14 lg:pb-20">
         
-        {/* Top Header Tag */}
+        {/* Top Header Label */}
         <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#351C18] border border-[#FFD83D]/30 text-xs font-bold text-[#FFD83D] tracking-wider uppercase">
+          <div className="hero-label inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#351C18] border border-[#FFB928]/35 text-xs font-bold text-[#FFB928] tracking-wider uppercase shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-[#F47735]" />
-            <span>Vandiperiyar, Idukki — Traditional Kerala Snacks & Bakery</span>
+            <span>FRESHLY MADE. FULL OF FLAVOUR.</span>
           </div>
         </div>
 
         {/* Center Title & Slogan */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <h1 className="editorial-headline text-4xl sm:text-6xl lg:text-7xl font-black text-[#FFF9F1] tracking-tight leading-[1.05] mb-4">
-            Baking Smiles, Frying Traditions <br />
-            <span className="text-[#FFD83D] underline decoration-[#F47735] decoration-wavy decoration-2">
-              One Batch At A Time
+          <h1 className="editorial-headline text-4xl sm:text-6xl lg:text-7xl font-black text-[#FFF9EF] tracking-tight leading-[1.05] mb-4">
+            <span className="hero-title-word inline-block mr-3">GOOD</span>
+            <span className="hero-title-word inline-block text-[#FFB928] underline decoration-[#F47735] decoration-wavy decoration-2 mr-3">
+              FOOD.
             </span>
+            <br />
+            <span className="hero-title-word inline-block mr-3">FRESH</span>
+            <span className="hero-title-word inline-block text-[#FFB928]">MOMENTS.</span>
           </h1>
-          <p className="font-body text-base sm:text-lg text-[#EADBCC] max-w-xl mx-auto font-medium leading-relaxed">
-            Taste the authentic warmth, love, and heritage of God&apos;s Own Country in every bite. Prepared fresh in 100% pure cold-pressed coconut oil.
+          <p className="hero-subtext font-body text-base sm:text-lg text-[#EADBCC] max-w-xl mx-auto font-medium leading-relaxed">
+            Discover authentic Kerala snacks and freshly baked favourites, made for every table and every business. Prepared fresh in 100% pure cold-pressed coconut oil.
           </p>
 
           {/* Primary CTA Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6">
+          <div className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4 mt-6">
             <Link
               href="/products"
-              className="px-8 py-3.5 rounded-full bg-[#F47735] hover:bg-[#E06322] text-[#FFFFFF] font-display font-black text-sm uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2"
+              className="hero-cta-btn px-8 py-3.5 rounded-full bg-[#F47735] hover:bg-[#E06322] text-[#FFFFFF] font-display font-black text-sm uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
             >
               <ShoppingBag className="w-4 h-4" />
-              <span>See Our Menu</span>
+              <span>Explore Products</span>
             </Link>
 
             <Link
               href="/wholesale"
               onClick={onWholesaleClick}
-              className="px-8 py-3.5 rounded-full bg-[#351C18] hover:bg-[#45241F] text-[#FFD83D] font-display font-black text-sm uppercase tracking-wider border border-[#FFD83D]/40 hover:scale-105 transition-all flex items-center gap-2"
+              className="hero-cta-btn px-8 py-3.5 rounded-full bg-[#351C18] hover:bg-[#45241F] text-[#FFB928] font-display font-black text-sm uppercase tracking-wider border border-[#FFB928]/40 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
             >
-              <Building2 className="w-4 h-4 text-[#FFD83D]" />
-              <span>Wholesale Portal</span>
+              <Building2 className="w-4 h-4 text-[#FFB928]" />
+              <span>Wholesale Enquiry</span>
             </Link>
           </div>
         </div>
 
-        {/* 3-Column Asymmetric Display: Left Highlight | Center Big Cutout Photo | Right Customer Proof */}
+        {/* 3-Column Asymmetric Display */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center mt-8">
           
           {/* Left Column (3 Cols): Authentic Heritage USP */}
           <div className="lg:col-span-3 text-center lg:text-left order-2 lg:order-1 flex flex-col justify-center space-y-4">
-            <div className="p-5 rounded-3xl bg-[#351C18]/90 border border-[#EADBCC]/20 backdrop-blur">
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#FFD83D] block mb-1">
+            <div className="hero-side-card p-5 rounded-3xl bg-[#351C18]/90 border border-[#EADBCC]/20 backdrop-blur shadow-md">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-[#FFB928] block mb-1">
                 Heritage Craft
               </span>
-              <h2 className="font-display font-black text-xl text-[#FFF9F1] leading-snug">
-                Bringing Joy With Fresh, Homemade Delights
+              <h2 className="font-display font-black text-xl text-[#FFF9EF] leading-snug">
+                Bringing Joy With Fresh Kerala Delights
               </h2>
               <p className="text-xs text-[#EADBCC] mt-2 leading-relaxed">
                 Golden Kerala banana chips, authentic bakery breads, and traditional tea snacks straight from our Vandiperiyar facility.
               </p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-[#351C18]/60 border border-[#EADBCC]/10 flex items-center justify-between">
+            <div className="hero-side-card p-4 rounded-2xl bg-[#351C18]/60 border border-[#EADBCC]/10 flex items-center justify-between">
               <div>
-                <span className="font-display font-black text-2xl text-[#FFD83D]">100%</span>
+                <span className="font-display font-black text-2xl text-[#FFB928]">100%</span>
                 <p className="text-[11px] text-[#EADBCC]">Pure Coconut Oil</p>
               </div>
               <div className="h-8 w-px bg-[#EADBCC]/20" />
               <div>
-                <span className="font-display font-black text-2xl text-[#FFD83D]">Zero</span>
+                <span className="font-display font-black text-2xl text-[#FFB928]">Zero</span>
                 <p className="text-[11px] text-[#EADBCC]">Preservatives</p>
               </div>
             </div>
           </div>
 
-          {/* Center Column (6 Cols): Big Hero Product Photo (Golden Banana Chips & Croissants) */}
+          {/* Center Column (6 Cols): Big Hero Product Photo (HDR Golden Banana Chips) */}
           <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center relative">
-            <div className="relative w-full max-w-lg aspect-square sm:aspect-[4/3] rounded-[2.5rem] overflow-hidden border-2 border-[#FFD83D]/30 shadow-2xl group">
-              {/* Product Showcase Image */}
+            <div className="hero-image-card relative w-full max-w-lg aspect-square sm:aspect-[4/3] rounded-[2.5rem] overflow-hidden border-2 border-[#FFB928]/35 shadow-2xl group">
               <img
-                src="https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=1000&q=85"
+                src="https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=1200&q=85"
                 alt="Golden Kerala Banana Chips and Bakery Delights"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#2B1510]/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#2B1510]/85 via-transparent to-transparent pointer-events-none" />
 
               {/* Floating Badge on Image */}
-              <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between p-3.5 rounded-2xl bg-[#2B1510]/85 backdrop-blur border border-[#FFD83D]/30">
+              <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between p-3.5 rounded-2xl bg-[#2B1510]/90 backdrop-blur border border-[#FFB928]/30">
                 <div>
-                  <span className="text-[11px] font-bold text-[#FFD83D] uppercase tracking-wider block">
+                  <span className="text-[11px] font-bold text-[#FFB928] uppercase tracking-wider block">
                     Signature Batch
                   </span>
-                  <span className="font-display font-bold text-sm text-[#FFF9F1]">
-                    Nendran Banana Chips & Fresh Kerala Bakes
+                  <span className="font-display font-bold text-sm text-[#FFF9EF]">
+                    Nendran Banana Chips & Fresh Bakes
                   </span>
                 </div>
                 <Link
                   href="/products/kerala-banana-chips"
-                  className="px-3.5 py-1.5 rounded-full bg-[#F47735] text-[#FFFFFF] text-xs font-bold hover:bg-[#E06322] transition-colors flex items-center gap-1"
+                  className="px-3.5 py-1.5 rounded-full bg-[#F47735] text-[#FFFFFF] text-xs font-bold hover:bg-[#E06322] transition-colors flex items-center gap-1 shadow-sm"
                 >
                   <span>Order</span>
                   <ArrowRight className="w-3 h-3" />
@@ -170,13 +267,12 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
             </div>
           </div>
 
-          {/* Right Column (3 Cols): Ratings & Social Proof Card (inspired by Crave Bakery) */}
+          {/* Right Column (3 Cols): Ratings & Social Proof Card */}
           <div className="lg:col-span-3 text-center lg:text-left order-3 flex flex-col justify-center space-y-4">
-            <div className="p-5 rounded-3xl bg-[#351C18]/90 border border-[#EADBCC]/20 backdrop-blur">
-              {/* Rating Stars */}
+            <div className="hero-side-card p-5 rounded-3xl bg-[#351C18]/90 border border-[#EADBCC]/20 backdrop-blur shadow-md">
               <div className="flex items-center gap-1 justify-center lg:justify-start mb-2">
-                <span className="font-display font-black text-2xl text-[#FFD83D]">4.9</span>
-                <div className="flex text-[#FFD83D] ml-1">
+                <span className="font-display font-black text-2xl text-[#FFB928]">4.9</span>
+                <div className="flex text-[#FFB928] ml-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-current" />
                   ))}
@@ -184,23 +280,21 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
                 <span className="text-[11px] text-[#EADBCC] ml-1">(4,850+ Reviews)</span>
               </div>
 
-              {/* Testimonial Quote */}
-              <blockquote className="text-xs text-[#FFF9F1] italic leading-relaxed border-l-2 border-[#FFD83D] pl-3 my-2">
+              <blockquote className="text-xs text-[#FFF9EF] italic leading-relaxed border-l-2 border-[#FFB928] pl-3 my-2">
                 &ldquo;Amazing snacks and bakery goods every single time! Thin, crisp banana chips with pure coconut oil aroma. Perfect for our retail grocery supply.&rdquo;
               </blockquote>
 
-              <p className="text-[11px] font-bold text-[#FFD83D] mt-2">
+              <p className="text-[11px] font-bold text-[#FFB928] mt-2">
                 — Manoj K., Calicut Retailer
               </p>
             </div>
 
-            {/* Quick Delivery Badge */}
-            <div className="p-4 rounded-2xl bg-[#351C18]/60 border border-[#EADBCC]/10 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-[#FFD83D] text-[#281411] flex items-center justify-center font-bold text-sm shrink-0">
+            <div className="hero-side-card p-4 rounded-2xl bg-[#351C18]/60 border border-[#EADBCC]/10 flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-[#FFB928] text-[#281411] flex items-center justify-center font-bold text-sm shrink-0">
                 📦
               </div>
               <div className="text-left">
-                <span className="text-xs font-bold text-[#FFF9F1] block">Direct Factory Dispatch</span>
+                <span className="text-xs font-bold text-[#FFF9EF] block">Direct Factory Dispatch</span>
                 <span className="text-[11px] text-[#EADBCC] block">Retail packets & bulk B2B cartons</span>
               </div>
             </div>
@@ -210,8 +304,8 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
 
       </section>
 
-      {/* Maison Dorée Running Ticker Bar (Continuous Loop) */}
-      <div className="relative bg-[#FFD83D] text-[#281411] py-2.5 overflow-hidden border-y border-[#F47735]/30">
+      {/* Running Marquee Ticker Loop */}
+      <div className="relative bg-[#FFB928] text-[#281411] py-2.5 overflow-hidden border-y border-[#F47735]/30">
         <div className="flex whitespace-nowrap animate-marquee text-xs sm:text-sm font-display font-black uppercase tracking-wider">
           <span className="inline-block px-4">✦ Fresh Nendran Banana Chips — Daily Batches</span>
           <span className="inline-block px-4">✦ 100% Pure Cold-Pressed Coconut Oil</span>
