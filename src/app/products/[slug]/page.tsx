@@ -21,7 +21,7 @@ import {
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import DecorativeBadge from '@/components/ui/DecorativeBadge';
-import { getProductBySlug, apiCalculatePricing } from '@/lib/api';
+import { getProductBySlug, apiCalculatePricing, getHdrProductImage } from '@/lib/api';
 import { Product, ProductVariant, PricingCalculationResponse } from '@/types/api';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
@@ -177,25 +177,14 @@ function ProductDetailContent() {
             {/* Left Column: Visual Photography (5 Cols) */}
             <div className="lg:col-span-5 space-y-4">
               <div className="relative w-full aspect-square rounded-[2.5rem] bg-[#FFFFFF] border border-[#EADBCC] shadow-xl overflow-hidden group flex items-center justify-center">
-                {product.main_image ? (
-                  <Image
-                    src={product.main_image}
-                    alt={product.name}
-                    fill
-                    priority
-                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                  />
-                ) : (
-                  <div className="text-center p-8">
-                    <span className="font-display font-black text-6xl text-[#F47735]/30 block mb-2">
-                      ONFRESH
-                    </span>
-                    <span className="text-xs font-bold text-[#735C57] uppercase tracking-widest">
-                      Authentic Kerala Recipe
-                    </span>
-                  </div>
-                )}
+                <Image
+                  src={getHdrProductImage(product.slug, product.main_image)}
+                  alt={product.name}
+                  fill
+                  priority
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
 
                 {/* Floating Badges */}
                 <div className="absolute top-4 left-4 flex flex-col gap-2">

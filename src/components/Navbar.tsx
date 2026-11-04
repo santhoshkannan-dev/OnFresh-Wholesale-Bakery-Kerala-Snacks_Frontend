@@ -65,23 +65,12 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             {/* Brand Logo */}
-            <Link href="/" className="flex items-center gap-3 group shrink-0">
-              <div className="w-11 h-11 rounded-2xl bg-[#F47735] text-[#FFFFFF] flex items-center justify-center font-display font-black text-2xl shadow-md group-hover:scale-105 group-hover:rotate-3 transition-transform">
-                O
-              </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-display font-black text-2xl lg:text-3xl text-[#281411] tracking-tight leading-none">
-                    ON<span className="text-[#F47735]">FRESH</span>
-                  </span>
-                  <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-[#FFD83D] text-[#281411] font-bold text-[9px] uppercase tracking-wider">
-                    Bakery & Snacks
-                  </span>
-                </div>
-                <span className="text-[10px] font-semibold text-[#735C57] tracking-wider uppercase">
-                  Vandiperiyar • Idukki
-                </span>
-              </div>
+            <Link href="/" className="flex items-center group shrink-0 py-0.5">
+              <img
+                src="/images/logo.png"
+                alt="OnFresh — Bakery & Traditional Kerala Snacks"
+                className="h-10 sm:h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+              />
             </Link>
 
             {/* Desktop Navigation Links */}
@@ -296,9 +285,13 @@ export default function Navbar() {
           <div className="fixed inset-y-0 right-0 max-w-xs w-full bg-[#FFF9F1] shadow-2xl p-6 flex flex-col justify-between overflow-y-auto animate-in slide-in-from-right duration-300">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-[#EADBCC] mb-6">
-                <span className="font-display font-black text-2xl text-[#281411]">
-                  ON<span className="text-[#F47735]">FRESH</span>
-                </span>
+                <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                  <img
+                    src="/images/logo.png"
+                    alt="OnFresh"
+                    className="h-9 w-auto object-contain"
+                  />
+                </Link>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-8 h-8 rounded-full bg-[#F7EFE6] text-[#281411] flex items-center justify-center"

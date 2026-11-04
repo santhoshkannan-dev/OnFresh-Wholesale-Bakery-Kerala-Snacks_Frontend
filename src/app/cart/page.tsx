@@ -8,6 +8,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
+import { getHdrProductImage } from '@/lib/api';
 
 export default function CartPage() {
   const { cart, loading, updateQuantity, removeFromCart, clearCart } = useCart();
@@ -115,17 +116,13 @@ export default function CartPage() {
                     <div className="flex items-center gap-4">
                       {/* Image Thumbnail */}
                       <div className="w-20 h-20 rounded-2xl bg-[#F7EFE6] relative overflow-hidden shrink-0 border border-[#EADBCC] flex items-center justify-center">
-                        {item.image ? (
-                          <Image
-                            src={item.image}
-                            alt={item.product_name}
-                            fill
-                            className="object-cover"
-                            sizes="80px"
-                          />
-                        ) : (
-                          <span className="font-display font-black text-xl text-[#F47735]/40">OF</span>
-                        )}
+                        <Image
+                          src={getHdrProductImage(item.product_name, item.image)}
+                          alt={item.product_name}
+                          fill
+                          className="object-cover"
+                          sizes="80px"
+                        />
                       </div>
 
                       {/* Title & Variant Info */}

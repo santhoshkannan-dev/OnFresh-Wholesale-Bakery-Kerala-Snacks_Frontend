@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Building2, ChevronRight, ChevronLeft, Sparkles } from 'lucide-react';
+import { ArrowRight, Building2, Sparkles } from 'lucide-react';
 import ProductCard from './ui/ProductCard';
 import { getProducts } from '@/lib/api';
 import { Product } from '@/types/api';
@@ -12,7 +12,7 @@ export default function FeaturedProducts() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'all' | 'chips' | 'savouries' | 'bakery' | 'sweets'>('all');
 
-  // Fallback products if database has fresh instance
+  // Comprehensive HDR Product Showcase Catalog
   const fallbackProducts: Product[] = [
     {
       id: 1,
@@ -26,7 +26,7 @@ export default function FeaturedProducts() {
       min_price: '80.00',
       max_price: '300.00',
       created_at: '',
-      main_image: 'https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=600&q=80',
+      main_image: 'https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=1200&q=85',
       variants: [
         {
           id: 101,
@@ -78,7 +78,7 @@ export default function FeaturedProducts() {
       min_price: '85.00',
       max_price: '165.00',
       created_at: '',
-      main_image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=600&q=80',
+      main_image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=1200&q=85',
       variants: [
         {
           id: 104,
@@ -118,7 +118,7 @@ export default function FeaturedProducts() {
       min_price: '75.00',
       max_price: '145.00',
       created_at: '',
-      main_image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80',
+      main_image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=85',
       variants: [
         {
           id: 106,
@@ -158,7 +158,7 @@ export default function FeaturedProducts() {
       min_price: '70.00',
       max_price: '135.00',
       created_at: '',
-      main_image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80',
+      main_image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=85',
       variants: [
         {
           id: 108,
@@ -186,7 +186,7 @@ export default function FeaturedProducts() {
       min_price: '65.00',
       max_price: '120.00',
       created_at: '',
-      main_image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
+      main_image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=85',
       variants: [
         {
           id: 109,
@@ -214,7 +214,7 @@ export default function FeaturedProducts() {
       min_price: '95.00',
       max_price: '95.00',
       created_at: '',
-      main_image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80',
+      main_image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1200&q=85',
       variants: [
         {
           id: 111,
@@ -225,6 +225,90 @@ export default function FeaturedProducts() {
           price: '95.00',
           retail_price: '95.00',
           wholesale_price: '78.00',
+          minimum_order_quantity: 1,
+          is_available: true,
+        },
+      ],
+    },
+    {
+      id: 7,
+      name: 'Crispy Tapioca Chips (Kappa Chips)',
+      slug: 'tapioca-chips',
+      category: { id: 1, name: 'Banana Chips', slug: 'banana-chips' },
+      short_description: 'Thinly sliced sun-dried Kerala tapioca roots crisped in pure coconut oil with sea salt and curry leaves.',
+      description: 'Thinly sliced sun-dried Kerala tapioca roots crisped in pure coconut oil with sea salt and curry leaves.',
+      is_active: true,
+      is_featured: true,
+      min_price: '70.00',
+      max_price: '135.00',
+      created_at: '',
+      main_image: 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=1200&q=85',
+      variants: [
+        {
+          id: 112,
+          sku: 'ONF-KAP-250',
+          package_weight: '250',
+          package_unit: 'g',
+          display_weight: '250 g',
+          price: '70.00',
+          retail_price: '70.00',
+          wholesale_price: '55.00',
+          minimum_order_quantity: 1,
+          is_available: true,
+        },
+      ],
+    },
+    {
+      id: 8,
+      name: 'Kerala Plum Cake (Traditional Rich Fruit Cake)',
+      slug: 'kerala-plum-cake',
+      category: { id: 3, name: 'Kerala Bakery', slug: 'kerala-bakery' },
+      short_description: 'Dark, moist holiday fruit cake loaded with caramel-soaked black raisins, candied peel, and spices.',
+      description: 'Dark, moist holiday fruit cake loaded with caramel-soaked black raisins, candied peel, nutmeg, and aromatic cloves.',
+      is_active: true,
+      is_featured: true,
+      min_price: '180.00',
+      max_price: '450.00',
+      created_at: '',
+      main_image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=85',
+      variants: [
+        {
+          id: 113,
+          sku: 'ONF-PLUM-500',
+          package_weight: '500',
+          package_unit: 'g',
+          display_weight: '500 g Box',
+          price: '220.00',
+          retail_price: '220.00',
+          wholesale_price: '175.00',
+          minimum_order_quantity: 1,
+          is_available: true,
+        },
+      ],
+    },
+    {
+      id: 9,
+      name: 'Handcrafted Butter Murukku Rings',
+      slug: 'butter-murukku',
+      category: { id: 2, name: 'Traditional Savouries', slug: 'traditional-savouries' },
+      short_description: 'Golden spiral snack rings prepared from rich roasted rice flour, white sesame, and butter.',
+      description: 'Golden spiral snack rings prepared from rich roasted rice flour, white sesame, and fragrant cow butter.',
+      is_active: true,
+      is_featured: true,
+      min_price: '75.00',
+      max_price: '140.00',
+      created_at: '',
+      main_image: 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=1200&q=85',
+      variants: [
+        {
+          id: 114,
+          sku: 'ONF-MUR-250',
+          package_weight: '250',
+          package_unit: 'g',
+          display_weight: '250 g',
+          price: '75.00',
+          retail_price: '75.00',
+          wholesale_price: '60.00',
           minimum_order_quantity: 1,
           is_available: true,
         },
@@ -252,7 +336,7 @@ export default function FeaturedProducts() {
     const cat = (p.category?.name || '').toLowerCase();
     if (activeTab === 'chips') return cat.includes('chip') || cat.includes('banana');
     if (activeTab === 'savouries') return cat.includes('murukku') || cat.includes('mixture') || cat.includes('pakkavada');
-    if (activeTab === 'bakery') return cat.includes('bakery') || cat.includes('biscuit') || cat.includes('rusk') || cat.includes('bread');
+    if (activeTab === 'bakery') return cat.includes('bakery') || cat.includes('biscuit') || cat.includes('rusk') || cat.includes('cake');
     if (activeTab === 'sweets') return cat.includes('sweet') || cat.includes('halwa') || cat.includes('sharkkara');
     return true;
   });
@@ -265,7 +349,7 @@ export default function FeaturedProducts() {
         <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFD83D]/30 border border-[#FFD83D] text-[#281411] text-xs font-bold tracking-wider uppercase mb-3">
             <Sparkles className="w-3.5 h-3.5 text-[#F47735]" />
-            Fresh From Our Kitchen
+            High-Definition Fresh Showcase
           </div>
           <h2 className="editorial-headline text-3xl sm:text-5xl font-black text-[#281411] tracking-tight mb-3">
             Our Premium Products
@@ -274,13 +358,13 @@ export default function FeaturedProducts() {
             Traditional Kerala snacks, crisp chips, and daily bakery specialties made from natural ingredients and 100% pure coconut oil.
           </p>
 
-          {/* Clean Rounded Filter Pills (Crave Bakery Style) */}
+          {/* Clean Rounded Filter Pills */}
           <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
             {[
               { id: 'all', label: 'All Items' },
-              { id: 'chips', label: 'Banana Chips' },
+              { id: 'chips', label: 'Banana & Tapioca Chips' },
               { id: 'savouries', label: 'Savouries & Mixture' },
-              { id: 'bakery', label: 'Kerala Bakery' },
+              { id: 'bakery', label: 'Bakery & Cakes' },
               { id: 'sweets', label: 'Sweets & Halwa' },
             ].map((tab) => (
               <button

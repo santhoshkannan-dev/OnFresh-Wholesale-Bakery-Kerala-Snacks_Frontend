@@ -104,18 +104,12 @@ export default function Footer() {
             
             {/* Column 1 & 2: Brand Identity & Location (2 Cols) */}
             <div className="lg:col-span-2 space-y-4">
-              <Link href="/" className="flex items-center gap-3 group">
-                <div className="w-11 h-11 rounded-2xl bg-[#F47735] text-white flex items-center justify-center font-display font-black text-2xl shadow-md group-hover:scale-105 transition-transform">
-                  O
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-display font-black text-2xl text-[#FFF9F1] tracking-tight">
-                    ON<span className="text-[#FFD83D]">FRESH</span>
-                  </span>
-                  <span className="text-[10px] font-bold text-[#FFD83D] uppercase tracking-wider">
-                    Wholesale Bakery & Traditional Snacks
-                  </span>
-                </div>
+              <Link href="/" className="inline-block p-2.5 bg-[#FFF9F1] rounded-2xl shadow-md group hover:scale-105 transition-transform duration-300">
+                <img
+                  src="/images/logo.png"
+                  alt="OnFresh — Bakery & Traditional Kerala Snacks"
+                  className="h-11 w-auto object-contain"
+                />
               </Link>
 
               <p className="text-xs text-[#E8DCCF]/75 leading-relaxed max-w-sm">

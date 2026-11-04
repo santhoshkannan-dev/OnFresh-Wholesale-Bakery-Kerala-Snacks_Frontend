@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { X, ShoppingBag, Plus, Minus, Trash2, ArrowRight, Sparkles } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
+import { getHdrProductImage } from '@/lib/api';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -114,17 +115,13 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                 >
                   {/* Thumbnail */}
                   <div className="w-20 h-20 rounded-xl bg-[#F7EFE6] overflow-hidden shrink-0 relative flex items-center justify-center border border-[#EADBCC]">
-                    {item.image ? (
-                      <Image
-                        src={item.image}
-                        alt={item.product_name}
-                        fill
-                        className="object-cover"
-                        sizes="80px"
-                      />
-                    ) : (
-                      <span className="font-display font-bold text-2xl text-[#F47735]/40">OF</span>
-                    )}
+                    <Image
+                      src={getHdrProductImage(item.product_name, item.image)}
+                      alt={item.product_name}
+                      fill
+                      className="object-cover"
+                      sizes="80px"
+                    />
                   </div>
 
                   {/* Details */}

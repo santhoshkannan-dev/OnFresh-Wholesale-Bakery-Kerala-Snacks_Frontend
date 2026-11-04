@@ -7,6 +7,7 @@ import { ShoppingBag, Check, Building2, Sparkles } from 'lucide-react';
 import { Product, ProductVariant } from '@/types/api';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
+import { getHdrProductImage } from '@/lib/api';
 
 interface ProductCardProps {
   product: Product;
@@ -62,20 +63,13 @@ export default function ProductCard({ product, className = '' }: ProductCardProp
       {/* Top Image Container with Crave Bakery Style Price Badge */}
       <Link href={`/products/${product.slug}`} className="block relative">
         <div className="w-full aspect-[4/3] rounded-2xl bg-[#FFF9F1] relative overflow-hidden flex items-center justify-center border border-[#EADBCC]/60">
-          {product.main_image ? (
-            <Image
-              src={product.main_image}
-              alt={product.name}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          ) : (
-            <div className="flex flex-col items-center justify-center p-4 text-center">
-              <span className="font-display font-black text-3xl text-[#F47735]/40 mb-1">ONFRESH</span>
-              <span className="text-[10px] font-bold text-[#735C57] uppercase tracking-wider">Traditional Snack</span>
-            </div>
-          )}
+          <Image
+            src={getHdrProductImage(product.slug, product.main_image)}
+            alt={product.name}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
 
           {/* Floating Category & Featured Badge (Top-Left) */}
           <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">

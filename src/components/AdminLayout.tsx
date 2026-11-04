@@ -130,18 +130,15 @@ export default function AdminLayout({
       <aside className="hidden lg:flex lg:flex-col w-64 bg-[#FFFFFF] border-r border-[#EADBCC] shrink-0 select-none">
         {/* Brand Banner */}
         <div className="h-16 px-6 border-b border-[#F7EFE6] flex items-center justify-between">
-          <Link href="/admin/dashboard" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-[#F47735] flex items-center justify-center text-white font-display font-black text-lg shadow-sm">
-              O
-            </div>
-            <div>
-              <span className="font-display font-black text-[#281411] text-base tracking-tight block leading-none">
-                OnFresh
-              </span>
-              <span className="text-[10px] font-bold text-[#F47735] uppercase tracking-wider block mt-0.5">
-                Admin ERP
-              </span>
-            </div>
+          <Link href="/admin/dashboard" className="flex items-center gap-2">
+            <img
+              src="/images/logo.png"
+              alt="OnFresh Admin ERP"
+              className="h-8 w-auto object-contain"
+            />
+            <span className="text-[10px] font-bold text-[#F47735] uppercase tracking-wider bg-[#FFF9DC] px-1.5 py-0.5 rounded">
+              ERP
+            </span>
           </Link>
           <span className="text-[10px] font-bold text-[#287B52] bg-[#E8F4EE] px-2 py-0.5 rounded-full">
             Staff

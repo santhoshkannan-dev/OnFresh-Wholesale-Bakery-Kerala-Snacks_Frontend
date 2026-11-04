@@ -45,6 +45,53 @@ const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
 /**
+ * High-Definition (HDR) Product Photography Mapping for OnFresh Showcase.
+ * Guarantees every snack and bakery card renders an authentic, ultra-crisp image.
+ */
+export const HDR_PRODUCT_IMAGES: Record<string, string> = {
+  'kerala-banana-chips': 'https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=1200&q=85',
+  'kerala-nendran-banana-chips': 'https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=1200&q=85',
+  'banana-chips': 'https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=1200&q=85',
+  'spicy-pepper-banana-chips': 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=1200&q=85',
+  'peri-peri-banana-chips': 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=1200&q=85',
+  'spicy-peri-peri-banana-chips': 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=1200&q=85',
+  'sharkkara-varatti': 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1200&q=85',
+  'sweet-sharkkara-varatti': 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1200&q=85',
+  'kerala-mixture': 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=85',
+  'special-kerala-mixture': 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=85',
+  'mixture-savouries': 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=85',
+  'ribbon-pakkavada': 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=85',
+  'traditional-ribbon-murukku': 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=85',
+  'butter-murukku': 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=1200&q=85',
+  'butter-rusk': 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=85',
+  'crispy-cardamom-tea-rusk': 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=85',
+  'cardamom-rusk': 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=85',
+  'kerala-plum-cake': 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=85',
+  'spicy-tapioca-chips': 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=1200&q=85',
+  'tapioca-chips': 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=1200&q=85',
+  'jackfruit-chips': 'https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=1200&q=85',
+  'crispy-onion-pakkoda': 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=85',
+  'bakery-butter-cookies': 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1200&q=85',
+  'biscuits-cookies': 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1200&q=85',
+};
+
+export function getHdrProductImage(slug?: string, currentImage?: string | null): string {
+  if (currentImage && (currentImage.startsWith('http://') || currentImage.startsWith('https://'))) {
+    return currentImage;
+  }
+  if (!slug) {
+    return 'https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=1200&q=85';
+  }
+  const cleanSlug = slug.toLowerCase();
+  for (const [key, url] of Object.entries(HDR_PRODUCT_IMAGES)) {
+    if (cleanSlug.includes(key) || key.includes(cleanSlug)) {
+      return url;
+    }
+  }
+  return 'https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=1200&q=85';
+}
+
+/**
  * Fetch system health and connectivity status from Django backend.
  */
 export async function getBackendHealth(): Promise<{
@@ -170,16 +217,28 @@ export async function getProducts(params?: ProductQueryParams): Promise<{
 
     const json = await res.json();
     if (Array.isArray(json)) {
+      const results = json.map((p) => ({
+        ...p,
+        main_image: getHdrProductImage(p.slug, p.main_image),
+      }));
       return {
         data: {
-          count: json.length,
+          count: results.length,
           next: null,
           previous: null,
-          results: json,
+          results,
         },
         error: null,
       };
     }
+
+    if (json && Array.isArray(json.results)) {
+      json.results = json.results.map((p: Product) => ({
+        ...p,
+        main_image: getHdrProductImage(p.slug, p.main_image),
+      }));
+    }
+
     return { data: json, error: null };
   } catch (err: unknown) {
     return {
@@ -207,6 +266,9 @@ export async function getProductBySlug(slug: string): Promise<{
     }
 
     const data: Product = await res.json();
+    if (data) {
+      data.main_image = getHdrProductImage(data.slug, data.main_image);
+    }
     return { data, error: null };
   } catch (err: unknown) {
     return {
