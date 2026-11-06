@@ -191,11 +191,11 @@ export default function CategoryShowcase() {
         {/* Section Header */}
         <div className="cat-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#F47735]/15 border border-[#F47735]/30 text-[#F47735] text-xs font-bold uppercase tracking-wider mb-3">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#F47735]/15 border border-[#F47735]/30 text-[#F47735] text-xs font-sharp font-bold uppercase tracking-widest mb-3">
               <Sparkles className="w-3.5 h-3.5 text-[#F47735]" />
               Authentic Kerala Pantry
             </div>
-            <h2 className="editorial-headline text-3xl sm:text-5xl lg:text-6xl font-black text-[#542817] tracking-tight">
+            <h2 className="editorial-headline font-monument text-2xl sm:text-4xl lg:text-5xl font-black text-[#542817] tracking-tight">
               EXPLORE OUR FLAVOURS.
             </h2>
             <p className="text-xs sm:text-sm text-[#735C57] font-medium max-w-xl mt-2 leading-relaxed">

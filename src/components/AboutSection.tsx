@@ -94,10 +94,10 @@ export default function AboutSection() {
         
         {/* Top Story Header */}
         <div className="story-header text-center max-w-3xl mx-auto mb-16">
-          <span className="story-text-anim text-xs font-serif italic text-[#FFB928] tracking-widest uppercase block mb-2">
-            Heritage Bakery & Snacks
+          <span className="story-text-anim text-xs sm:text-sm font-casta italic text-[#FFB928] tracking-widest block mb-2">
+            Heritage Bakery & Snacks from Vandiperiyar, Idukki
           </span>
-          <h2 className="story-text-anim editorial-headline text-4xl sm:text-6xl font-black text-[#FFF9EF] tracking-tight mb-4">
+          <h2 className="story-text-anim editorial-headline font-monument text-3xl sm:text-5xl lg:text-6xl font-black text-[#FFF9EF] tracking-tight mb-4">
             ROOTED IN TRADITION. <br />
             <span className="text-[#FFB928] underline decoration-[#F47735] decoration-wavy decoration-2">
               MADE FOR TODAY.
@@ -120,10 +120,10 @@ export default function AboutSection() {
                 className="story-text-anim p-5 rounded-2xl bg-[#351C18]/80 border border-[#EADBCC]/15 text-center flex flex-col items-center hover:border-[#FFB928]/40 transition-colors"
               >
                 <span className="text-2xl mb-2">{item.icon}</span>
-                <span className="text-[10px] font-mono font-bold text-[#FFB928] uppercase tracking-widest block">
+                <span className="text-[10px] font-sharp font-bold text-[#FFB928] uppercase tracking-widest block">
                   Step {item.step}
                 </span>
-                <h4 className="font-display font-black text-base text-[#FFF9EF] mt-1 mb-1">
+                <h4 className="font-monument font-bold text-sm text-[#FFF9EF] mt-1 mb-1">
                   {item.title}
                 </h4>
                 <p className="text-[11px] text-[#EADBCC] leading-relaxed">

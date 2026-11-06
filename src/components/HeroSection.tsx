@@ -164,7 +164,7 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
         
         {/* Top Header Label */}
         <div className="flex justify-center mb-6">
-          <div className="hero-label inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#351C18] border border-[#FFB928]/35 text-xs font-bold text-[#FFB928] tracking-wider uppercase shadow-sm">
+          <div className="hero-label inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#351C18] border border-[#FFB928]/35 text-xs font-sharp font-bold text-[#FFB928] tracking-widest uppercase shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-[#F47735]" />
             <span>FRESHLY MADE. FULL OF FLAVOUR.</span>
           </div>
@@ -172,7 +172,7 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
 
         {/* Center Title & Slogan */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <h1 className="editorial-headline text-4xl sm:text-6xl lg:text-7xl font-black text-[#FFF9EF] tracking-tight leading-[1.05] mb-4">
+          <h1 className="editorial-headline font-monument text-3xl sm:text-5xl lg:text-6xl font-black text-[#FFF9EF] tracking-tight leading-[1.08] mb-4">
             <span className="hero-title-word inline-block mr-3">GOOD</span>
             <span className="hero-title-word inline-block text-[#FFB928] underline decoration-[#F47735] decoration-wavy decoration-2 mr-3">
               FOOD.
@@ -189,7 +189,7 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
           <div className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4 mt-6">
             <Link
               href="/products"
-              className="hero-cta-btn px-8 py-3.5 rounded-full bg-[#F47735] hover:bg-[#E06322] text-[#FFFFFF] font-display font-black text-sm uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
+              className="hero-cta-btn px-8 py-3.5 rounded-full bg-[#F47735] hover:bg-[#E06322] text-[#FFFFFF] font-monument font-black text-xs uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>Explore Products</span>
@@ -198,7 +198,7 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
             <Link
               href="/wholesale"
               onClick={onWholesaleClick}
-              className="hero-cta-btn px-8 py-3.5 rounded-full bg-[#351C18] hover:bg-[#45241F] text-[#FFB928] font-display font-black text-sm uppercase tracking-wider border border-[#FFB928]/40 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
+              className="hero-cta-btn px-8 py-3.5 rounded-full bg-[#351C18] hover:bg-[#45241F] text-[#FFB928] font-monument font-black text-xs uppercase tracking-wider border border-[#FFB928]/40 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
             >
               <Building2 className="w-4 h-4 text-[#FFB928]" />
               <span>Wholesale Enquiry</span>
@@ -212,10 +212,10 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
           {/* Left Column (3 Cols): Authentic Heritage USP */}
           <div className="lg:col-span-3 text-center lg:text-left order-2 lg:order-1 flex flex-col justify-center space-y-4">
             <div className="hero-side-card p-5 rounded-3xl bg-[#351C18]/90 border border-[#EADBCC]/20 backdrop-blur shadow-md">
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#FFB928] block mb-1">
+              <span className="text-[10px] font-sharp font-bold uppercase tracking-widest text-[#FFB928] block mb-1">
                 Heritage Craft
               </span>
-              <h2 className="font-display font-black text-xl text-[#FFF9EF] leading-snug">
+              <h2 className="font-casta font-bold text-2xl text-[#FFF9EF] leading-snug">
                 Bringing Joy With Fresh Kerala Delights
               </h2>
               <p className="text-xs text-[#EADBCC] mt-2 leading-relaxed">
@@ -225,12 +225,12 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
 
             <div className="hero-side-card p-4 rounded-2xl bg-[#351C18]/60 border border-[#EADBCC]/10 flex items-center justify-between">
               <div>
-                <span className="font-display font-black text-2xl text-[#FFB928]">100%</span>
+                <span className="font-monument font-black text-2xl text-[#FFB928]">100%</span>
                 <p className="text-[11px] text-[#EADBCC]">Pure Coconut Oil</p>
               </div>
               <div className="h-8 w-px bg-[#EADBCC]/20" />
               <div>
-                <span className="font-display font-black text-2xl text-[#FFB928]">Zero</span>
+                <span className="font-monument font-black text-2xl text-[#FFB928]">Zero</span>
                 <p className="text-[11px] text-[#EADBCC]">Preservatives</p>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Bricolage_Grotesque, Plus_Jakarta_Sans } from 'next/font/google';
+import { Bricolage_Grotesque, Plus_Jakarta_Sans, Fraunces, Unbounded, Syne } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import { CartProvider } from '@/context/CartContext';
@@ -12,6 +12,27 @@ const fontBricolage = Bricolage_Grotesque({
 
 const fontJakarta = Plus_Jakarta_Sans({
   variable: '--font-jakarta',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+// Casta Typeface Inspiration: High-contrast luxury editorial display serif
+const fontCasta = Fraunces({
+  variable: '--font-casta',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+// Monument Extended Inspiration: Heavy, ultra-wide architectural extended typeface
+const fontMonument = Unbounded({
+  variable: '--font-monument',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+// Centrion / Sharp Avant-Garde Inspiration: Bold angular display
+const fontSyne = Syne({
+  variable: '--font-syne',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -123,7 +144,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fontBricolage.variable} ${fontJakarta.variable} h-full antialiased`}
+      className={`${fontBricolage.variable} ${fontJakarta.variable} ${fontCasta.variable} ${fontMonument.variable} ${fontSyne.variable} h-full antialiased`}
     >
       <head>
         <script

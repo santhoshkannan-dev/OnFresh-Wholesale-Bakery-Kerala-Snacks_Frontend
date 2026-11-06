@@ -405,11 +405,11 @@ export default function FeaturedProducts() {
         
         {/* Carousel Heading & Filter Controls */}
         <div className="featured-header text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFB928]/30 border border-[#FFB928] text-[#281411] text-xs font-bold tracking-wider uppercase mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFB928]/30 border border-[#FFB928] text-[#281411] text-xs font-sharp font-bold tracking-widest uppercase mb-3">
             <Sparkles className="w-3.5 h-3.5 text-[#F47735]" />
             High-Definition Fresh Showcase
           </div>
-          <h2 className="editorial-headline text-3xl sm:text-5xl lg:text-6xl font-black text-[#542817] tracking-tight mb-3">
+          <h2 className="editorial-headline font-monument text-2xl sm:text-4xl lg:text-5xl font-black text-[#542817] tracking-tight mb-3">
             MADE FRESH. LOVED ALWAYS.
           </h2>
           <p className="text-xs sm:text-base text-[#735C57] font-medium max-w-xl mx-auto">

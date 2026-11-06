@@ -18,6 +18,9 @@
 
   --font-display: var(--font-bricolage), system-ui, sans-serif;
   --font-body: var(--font-jakarta), system-ui, sans-serif;
+  --font-casta: var(--font-casta), serif;
+  --font-monument: var(--font-monument), system-ui, sans-serif;
+  --font-syne: var(--font-syne), system-ui, sans-serif;
 }
 
 :root {
@@ -57,11 +60,32 @@ body {
   font-family: var(--font-jakarta), system-ui, sans-serif;
 }
 
+/* 1. Casta Style: High-contrast luxury editorial display serif */
+.font-casta,
+.font-serif-luxury {
+  font-family: var(--font-casta), 'Playfair Display', Georgia, serif;
+  font-feature-settings: "swsh" 1, "dlig" 1;
+}
+
+/* 2. Monument Extended Style: Heavy, ultra-wide architectural extended typeface */
+.font-monument,
+.font-extended {
+  font-family: var(--font-monument), var(--font-bricolage), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* 3. Centrion Style: Sharp, angular avant-garde accent */
+.font-syne,
+.font-sharp {
+  font-family: var(--font-syne), system-ui, sans-serif;
+  letter-spacing: 0.04em;
+}
+
 /* Custom bakery styling utilities */
 .editorial-headline {
-  font-family: var(--font-bricolage), system-ui, sans-serif;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  font-family: var(--font-monument), var(--font-bricolage), system-ui, sans-serif;
+  letter-spacing: -0.025em;
+  line-height: 0.98;
   text-transform: uppercase;
 }
 

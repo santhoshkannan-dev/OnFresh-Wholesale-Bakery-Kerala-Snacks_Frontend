@@ -119,12 +119,12 @@ export default function WholesaleEnquirySection({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Business Value Proposition (6 Cols) */}
           <div ref={leftColRef} className="lg:col-span-6 flex flex-col items-start">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#542817] text-[#FFB928] text-xs font-bold tracking-wider uppercase mb-4 shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#542817] text-[#FFB928] text-xs font-sharp font-bold tracking-widest uppercase mb-4 shadow-sm">
               <Building2 className="w-3.5 h-3.5 text-[#FFB928]" />
               <span>B2B Wholesale Partnerships</span>
             </div>
 
-            <h2 className="editorial-headline text-4xl sm:text-6xl font-black text-[#542817] tracking-tight leading-[0.95] mb-6">
+            <h2 className="editorial-headline font-monument text-3xl sm:text-5xl lg:text-6xl font-black text-[#542817] tracking-tight leading-[1.02] mb-6">
               LET&apos;S GROW<br />
               <span className="text-[#287B35] underline decoration-[#FFB928] decoration-wavy decoration-2">
                 YOUR BUSINESS.
