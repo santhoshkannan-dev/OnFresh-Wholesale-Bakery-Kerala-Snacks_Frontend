@@ -317,14 +317,55 @@ export default function Navbar() {
                   Shop All Snacks
                 </Link>
 
+                <div className="pt-2 pb-1 px-4 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#A89088]">
+                  <span>Snacks Map of Kerala</span>
+                  <span className="text-[10px] text-[#287B35] font-black">17 Items</span>
+                </div>
+
+                <div className="px-4 py-2 bg-[#FEECE2] rounded-2xl mx-2 mb-2 border border-[#F5A477]/40">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs font-black text-[#542817]">🌴 Snacks Map of Kerala</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      { name: 'Nendrakai Chips', slug: 'kerala-nendran-banana-chips' },
+                      { name: 'Masala Chips', slug: 'masala-nendrakai-chips' },
+                      { name: 'Paya Chips', slug: 'paya-chips' },
+                      { name: 'Sarkaravarati', slug: 'sharkkara-varatti' },
+                      { name: 'Stick Poola', slug: 'stick-poola' },
+                      { name: 'Poola Chips', slug: 'poola-chips' },
+                      { name: 'Chakka Chips', slug: 'jackfruit-chips' },
+                      { name: 'Thenkuzhal', slug: 'thenkuzhal-murukku' },
+                      { name: 'Kai Murukku', slug: 'kai-murukku' },
+                      { name: 'Ring Murukku', slug: 'ring-murukku' },
+                      { name: 'Ribbon Pakavada', slug: 'ribbon-pakavada' },
+                      { name: 'Thattai Vada', slug: 'thattai-vada' },
+                      { name: 'Uppu Seedai', slug: 'uppu-seedai' },
+                      { name: 'Vella Seedai', slug: 'vella-seedai' },
+                      { name: 'Kerala Mixture', slug: 'special-spicy-kerala-mixture' },
+                      { name: 'Masala Kadala', slug: 'masala-kadala' },
+                      { name: 'Masala Chola', slug: 'masala-chola' },
+                    ].map((item) => (
+                      <Link
+                        key={item.slug}
+                        href={`/products/${item.slug}`}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="px-2.5 py-1 rounded-lg bg-white border border-[#EADBCC] text-[11px] font-bold text-[#542817] hover:border-[#287B35]"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="pt-2 pb-1 px-4 text-xs font-bold uppercase tracking-wider text-[#A89088]">
-                  Categories
+                  Browse Categories
                 </div>
 
                 {[
                   { name: 'Banana Chips', slug: 'banana-chips' },
-                  { name: 'Tapioca & Jackfruit Chips', slug: 'tapioca-jackfruit-chips' },
-                  { name: 'Murukku & Savouries', slug: 'murukku-traditional-snacks' },
+                  { name: 'Tapioca & Jackfruit Chips', slug: 'traditional-snacks' },
+                  { name: 'Murukku & Savouries', slug: 'traditional-snacks' },
                   { name: 'Mixture & Namkeen', slug: 'mixture-savouries' },
                   { name: 'Bakery Products', slug: 'bakery-products' },
                   { name: 'Biscuits & Cookies', slug: 'biscuits-cookies' },
