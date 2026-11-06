@@ -27,34 +27,57 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: animationConfig.easings.heroEntrance } });
 
-      // 1. Label Reveal
-      tl.from('.hero-label', {
-        y: -18,
+      // 1. Subtle Background Reveal
+      tl.from('.hero-bg-glow', {
         opacity: 0,
-        duration: 0.6,
+        scale: 0.8,
+        duration: 0.9,
+        ease: 'power2.out',
       })
-      // 2. Headline Words Staggered Reveal
+      // 2. Logo Fades and Scales into Position
+      .from(
+        '.hero-brand-logo',
+        {
+          opacity: 0,
+          scale: 0.85,
+          y: -10,
+          duration: 0.65,
+          ease: 'back.out(1.5)',
+        },
+        '-=0.5'
+      )
+      // 3. Small Announcement Label Appears
+      .from(
+        '.hero-label',
+        {
+          y: -16,
+          opacity: 0,
+          duration: 0.55,
+        },
+        '-=0.35'
+      )
+      // 4. Hero Headline Reveals Word by Word
       .from(
         '.hero-title-word',
         {
-          y: 45,
+          y: 40,
           opacity: 0,
           stagger: 0.08,
-          duration: 0.8,
+          duration: 0.75,
         },
         '-=0.3'
       )
-      // 3. Supporting Text
+      // 5. Supporting Text Enters Upward
       .from(
         '.hero-subtext',
         {
           y: 20,
           opacity: 0,
-          duration: 0.6,
+          duration: 0.55,
         },
-        '-=0.4'
+        '-=0.35'
       )
-      // 4. CTA Buttons Elastic Pop
+      // 6. CTA Buttons Animate into Position with Pop
       .from(
         '.hero-cta-btn',
         {
@@ -67,18 +90,18 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
         },
         '-=0.3'
       )
-      // 5. Hero Image Card Reveal with Clipping Mask
+      // 7. Hero Image Card Reveals with Organic Rounded Mask
       .from(
         '.hero-image-card',
         {
-          scale: 0.92,
+          scale: 0.93,
           opacity: 0,
           duration: 1.0,
           ease: 'power3.out',
         },
         '-=0.5'
       )
-      // 6. Side Feature Cards Stagger
+      // 8. Side Feature Cards Stagger into Place
       .from(
         '.hero-side-card',
         {
@@ -159,11 +182,22 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
         <span className="hero-float-item absolute bottom-24 right-1/6 text-2xl text-[#F47735]">✦</span>
       </div>
 
+      {/* Subtle Background Glow */}
+      <div className="hero-bg-glow absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[#FFB928]/10 rounded-full blur-3xl pointer-events-none" />
+
       {/* Main Hero Container */}
-      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 lg:pt-14 lg:pb-20">
+      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 lg:pt-12 lg:pb-20">
         
-        {/* Top Header Label */}
-        <div className="flex justify-center mb-6">
+        {/* Top Brand Logo & Header Label */}
+        <div className="flex flex-col items-center justify-center gap-3 mb-6">
+          <div className="hero-brand-logo flex items-center justify-center p-2 rounded-2xl bg-[#FFF9EF]/95 shadow-md">
+            <img
+              src="/images/logo.png"
+              alt="OnFresh"
+              className="h-9 sm:h-11 w-auto object-contain"
+            />
+          </div>
+
           <div className="hero-label inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#351C18] border border-[#FFB928]/35 text-xs font-sharp font-bold text-[#FFB928] tracking-widest uppercase shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-[#F47735]" />
             <span>FRESHLY MADE. FULL OF FLAVOUR.</span>
