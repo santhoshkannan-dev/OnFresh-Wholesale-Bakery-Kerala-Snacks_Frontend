@@ -49,9 +49,9 @@ const API_BASE_URL =
  * Guarantees every snack and bakery card renders an authentic, ultra-crisp image.
  */
 export const HDR_PRODUCT_IMAGES: Record<string, string> = {
-  'kerala-banana-chips': 'https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=1200&q=85',
-  'kerala-nendran-banana-chips': 'https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=1200&q=85',
-  'banana-chips': 'https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=1200&q=85',
+  'kerala-banana-chips': '/images/hero-banana-chips.jpg',
+  'kerala-nendran-banana-chips': '/images/hero-banana-chips.jpg',
+  'banana-chips': '/images/hero-banana-chips.jpg',
   'spicy-pepper-banana-chips': 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=1200&q=85',
   'peri-peri-banana-chips': 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=1200&q=85',
   'spicy-peri-peri-banana-chips': 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=1200&q=85',

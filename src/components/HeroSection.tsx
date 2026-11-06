@@ -238,30 +238,30 @@ export default function HeroSection({ onWholesaleClick }: HeroSectionProps) {
 
           {/* Center Column (6 Cols): Big Hero Product Photo (HDR Golden Banana Chips) */}
           <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center relative">
-            <div className="hero-image-card relative w-full max-w-lg aspect-square sm:aspect-[4/3] rounded-[2.5rem] overflow-hidden border-2 border-[#FFB928]/35 shadow-2xl group">
+            <div className="hero-image-card relative w-full max-w-xl aspect-[16/10] sm:aspect-[16/9] rounded-[2.5rem] overflow-hidden border-2 border-[#FFB928]/40 shadow-2xl group bg-[#1F0E0A]">
               <img
-                src="https://images.unsplash.com/photo-1621996346565-e3d5d6281292?auto=format&fit=crop&w=1200&q=85"
-                alt="Golden Kerala Banana Chips and Bakery Delights"
+                src="/images/hero-banana-chips.jpg"
+                alt="Kerala Banana Chips — Handcrafted in 100% Pure Coconut Oil"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#2B1510]/85 via-transparent to-transparent pointer-events-none" />
 
               {/* Floating Badge on Image */}
-              <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between p-3.5 rounded-2xl bg-[#2B1510]/90 backdrop-blur border border-[#FFB928]/30">
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-[#2B1510]/95 backdrop-blur-md border border-[#FFB928]/35 shadow-lg">
                 <div>
                   <span className="text-[11px] font-bold text-[#FFB928] uppercase tracking-wider block">
-                    Signature Batch
+                    Signature Kerala Specialty
                   </span>
-                  <span className="font-display font-bold text-sm text-[#FFF9EF]">
-                    Nendran Banana Chips & Fresh Bakes
+                  <span className="font-display font-black text-sm sm:text-base text-[#FFF9EF]">
+                    Crispy Nendran Banana Chips
                   </span>
                 </div>
                 <Link
                   href="/products/kerala-banana-chips"
-                  className="px-3.5 py-1.5 rounded-full bg-[#F47735] text-[#FFFFFF] text-xs font-bold hover:bg-[#E06322] transition-colors flex items-center gap-1 shadow-sm"
+                  className="px-4 py-2 rounded-full bg-[#F47735] text-[#FFFFFF] text-xs font-black uppercase tracking-wider hover:bg-[#E06322] transition-colors flex items-center gap-1.5 shadow-md hover:scale-105 active:scale-95"
                 >
-                  <span>Order</span>
-                  <ArrowRight className="w-3 h-3" />
+                  <span>Order Now</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
